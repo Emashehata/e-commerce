@@ -96,12 +96,17 @@
               }
             ],
             "styles": [
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "node_modules/iconfont/dist/iconfont.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": ["node_modules/flowbite/dist/flowbite.min.js"]
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "507b13c9-6ede-4f66-a348-48472ba2a35a"
   }
 }
