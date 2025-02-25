@@ -22,7 +22,7 @@ export class ForgetPasswordComponent {
 
 
         verfiyCode:FormGroup = new FormGroup({
-            code:new FormControl ( null ,[Validators.required,Validators.pattern(/^[0-9]{5,}$/)])
+            resetCode:new FormControl ( null ,[Validators.required,Validators.pattern(/^[0-9]{5,}$/)])
           })
 
 

@@ -5,6 +5,8 @@ import { CategoryService } from '../../core/services/category/category.service';
 import { Icategory } from '../../shared/interfaces/icategory';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { RouterLink } from '@angular/router';
+import { CartService } from '../../core/services/cart/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -15,20 +17,26 @@ import { RouterLink } from '@angular/router';
 export class HomeComponent implements OnInit{
   private readonly productsService=inject(ProductsService);
   private readonly categoryService=inject(CategoryService);
+  private readonly cartService=inject(CartService);
+  private readonly toastrService=inject(ToastrService);
   products:Iproduct[]=[];
   categories:Icategory[]=[];
+
+
+
+
+  ngOnInit(): void {
+    this.getProductsData();
+    this.getCategoriesData();
+}
 
   getProductsData(){
     this.productsService.getAllProducts().subscribe(
       {
         next:(res)=>{
-            // console.log(res.data);
+            console.log(res.data);
             this.products=res.data;
-        },
-        error:(error)=>{
-          console.log(error);
-
-        },
+        }
       }
     )
   }
@@ -39,19 +47,12 @@ export class HomeComponent implements OnInit{
         next:(res)=>{
           this.categories=res.data;
           console.log(res);
-        },
-        error:(error)=>{
-            console.log(error);
-
         }
       }
     )
   }
 
-  ngOnInit(): void {
-      this.getProductsData();
-      this.getCategoriesData();
-  }
+
 
   customOptions: OwlOptions = {
     loop: true,
@@ -62,6 +63,7 @@ export class HomeComponent implements OnInit{
     autoplay:true,
     autoplaySpeed:3000,
     navSpeed: 700,
+    rtl:true,
     navText: ['', ''],
     responsive: {
       0: {
@@ -92,7 +94,24 @@ export class HomeComponent implements OnInit{
     navSpeed: 700,
     navText: ['', ''],
     items:1,
-    nav:true
+    nav:true,
+    rtl:true,
+
 
 }
+
+addToCart(id:string):void
+{
+      this.cartService.addProductToCart(id).subscribe({
+        next:(res)=>{
+          // console.log(res);
+          if(res.status==='success'){
+            this.toastrService.success(res.message,'Fresh Cart')
+          }
+
+        }
+      })
+}
+
+
 }

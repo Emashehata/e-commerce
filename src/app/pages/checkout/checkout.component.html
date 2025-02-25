@@ -1,1 +1,100 @@
-<p>checkout works!</p>
+<section class="main-sec w-1/2 mx-auto">
+  <h1 class="text-center text-green-600 text-3xl ">CheckOut</h1>
+  <form  [formGroup]="checkForm" (ngSubmit)="sumbitForm()">
+
+
+    <div class="mb-1">
+      @let phoneControl =checkForm.get('phone');
+      <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">phone:</label>
+      <input
+      formControlName="phone"
+      type="tel" id="phone" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-none w-full">
+      @if(phoneControl?.errors && phoneControl?.touched){
+        <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+          <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+          </svg>
+          <span class="sr-only">Danger</span>
+          <div>
+
+              <ul class="mt-1.5 list-disc list-inside">
+                 @if (phoneControl?.getError('required')) {
+                  <li>Phone is required</li>
+                 }
+                 @else  {
+                  <li>Enter vaild Phone</li>
+                 }
+
+            </ul>
+          </div>
+        </div>
+      }
+    </div>
+    <div class="mb-1">
+      @let detailsControl =checkForm.get('details');
+      <label for="details" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">details:</label>
+      <input
+      formControlName="details"
+      type="text" id="details" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-none w-full">
+      @if(detailsControl?.errors && detailsControl?.touched){
+        <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+          <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+          </svg>
+          <span class="sr-only">Danger</span>
+          <div>
+
+              <ul class="mt-1.5 list-disc list-inside">
+                 @if (detailsControl?.getError('required')) {
+                  <li>Details is required</li>
+                 }
+
+
+            </ul>
+          </div>
+        </div>
+      }
+    </div>
+    <div class="mb-1">
+      @let cityControl =checkForm.get('city');
+      <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">city:</label>
+      <input
+      formControlName="city"
+      type="text" id="city" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-none w-full">
+      @if(cityControl?.errors && cityControl?.touched){
+        <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+          <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+          </svg>
+          <span class="sr-only">Danger</span>
+          <div>
+
+              <ul class="mt-1.5 list-disc list-inside">
+                 @if (cityControl?.getError('required')) {
+                  <li>city is required</li>
+                 }
+
+
+            </ul>
+          </div>
+        </div>
+      }
+    </div>
+
+    <button type="sumbit"   [disabled]="isLoading"  class="btn-main mt-2">online Payment
+      @if (isLoading) {
+        <span><i class="fas fa-spin fa-spinner "></i></span>
+      }
+    </button>
+
+    @if (messageError) {
+      <p class="absolute top-0 translate-x-full translate-y-full
+      bg-red-400 rounded text-white p-2">{{messageError}}</p>
+    }
+
+    @if (succesMsg) {
+      <p class="absolute top-0 translate-x-full translate-y-full bg-green-400 rounded text-white p-2">{{succesMsg}}</p>
+    }
+
+  </form>
+</section>
