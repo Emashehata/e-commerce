@@ -106,7 +106,11 @@ addToCart(id:string):void
         next:(res)=>{
           // console.log(res);
           if(res.status==='success'){
-            this.toastrService.success(res.message,'Fresh Cart')
+            this.toastrService.success(res.message,'Fresh Cart');
+            // this.cartService.cartNumbers=res.numOfCartItems;
+            this.cartService.cartNumbers.next(res.numOfCartItems);
+            console.log(this.cartService.cartNumbers);
+
           }
 
         }

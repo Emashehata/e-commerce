@@ -69,9 +69,11 @@
           </li>
          }
         @else {
-          <li>
+          <li class="relative">
             <a routerLink="/cart" routerLinkActive="text-green-500"  class="block py-2 px-3 text-gray-700   rounded-sm   md:p-2  text-3xl" aria-current="page">
               <i class="fas fa-cart-shopping"></i></a>
+              <span class="absolute top-0 bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-green-900 dark:text-green-300">{{countCart}}</span>
+
           </li>
           <li>
             <a  role="button" class="block py-2 px-3    rounded-sm   md:p-0 text-gray-700" aria-current="page"
